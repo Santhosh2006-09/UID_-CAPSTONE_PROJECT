@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radiant Art Gallery</title>
+    <link rel="icon" href="Images/Misc/logo.png" type="image/png">
+    <link rel="stylesheet" href="Page.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+    <header>
+      <div class="logo-container">
+        <a href="Page.html">
+            <img src="Images/Misc/logo.png" alt="Radiant Art Logo" class="site-logo">
+        </a>
+      </div>
+      <button class="hamburger-btn" aria-label="Mobile Menu">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+      <nav>
+          <ul class="compact-nav">
+              <li><a href="#paintings" onclick="ArtGalleryApp.showCategory('paintings')">Paintings</a></li>
+              <li><a href="#abstract-art" onclick="ArtGalleryApp.showCategory('abstract-art')">Abstract</a></li>
+              <li><a href="#sculpture" onclick="ArtGalleryApp.showCategory('sculpture')">Sculptures</a></li>
+              <li><a href="#oil-paintings" onclick="ArtGalleryApp.showCategory('oil-paintings')">Oil Paintings</a></li>
+              <li><a href="#landscapes" onclick="ArtGalleryApp.showCategory('landscapes')">Landscapes</a></li>
+              <li><a href="#new-this-week" onclick="ArtGalleryApp.showCategory('new-this-week')">New</a></li>
+              <li><a href="#curated-collections" onclick="ArtGalleryApp.showCategory('curated-collections')">Curated</a></li>
+              <li><a href="#featured" onclick="ArtGalleryApp.showCategory('featured')">Top</a></li>
+              <li><a href="#largeworks" onclick="ArtGalleryApp.showCategory('large-works')">Large Works</a></li>
+              <li class="nav-action">
+                <button id="likedIcon" class="icon-btn liked-items-btn">
+                    <ion-icon name="heart"></ion-icon>
+                    <span class="badge like-count">0</span>
+                </button>
+            </li>
+            <li class="nav-action">
+                <button id="cartIcon" class="icon-btn cart-items-btn">
+                    <ion-icon name="cart"></ion-icon>
+                    <span class="badge cart-count">0</span>
+                </button>
+            </li>
+            <li class="nav-action">
+                <button class="icon-btn signup-btn">
+                    <ion-icon name="person-add"></ion-icon>
+                </button>
+            </li>
+        </ul>
+    </nav>
+    </header>
+
+<div id="checkoutPopup" class="popup-overlay">
+    <div class="popup-container">
+        <button class="close-popup" aria-label="Close checkout popup">&times;</button>
+        <h2>Complete Your Purchase</h2>
+        
+        <div class="checkout-progress">
+            <div class="progress-step active">1. Shipping</div>
+            <div class="progress-step">2. Payment</div>
+            <div class="progress-step">3. Review</div>
+        </div>
+        
+        <div class="checkout-summary">
+            <h3>Order Summary</h3>
+            <div id="checkoutItemsList" class="items-list"> </div>
+            <div class="summary-details">
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping:</span>
+                    <span id="shippingFee">$5.99</span>
+                </div>
+                <div class="summary-row">
+                    <span>Tax:</span>
+                    <span id="taxAmount">$0.00</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total:</span>
+                    <span id="checkoutTotal">$0.00</span>
+                </div>
+            </div>
+        </div>
+        
+        <form id="checkoutForm" class="checkout-form">
+            <fieldset class="form-section">
+                <legend>Shipping Information</legend>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name*</label>
+                        <input type="text" id="firstName" placeholder="John" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name*</label>
+                        <input type="text" id="lastName" placeholder="Smith" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Street Address*</label>
+                    <input type="text" id="address" placeholder="123 Main St" required>
+                    <input type="text" id="address2" placeholder="Apt, suite, etc. (optional)" class="mt-1">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">City*</label>
+                        <input type="text" id="city" placeholder="New York" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State/Union Territory*</label>
+                        <select id="state" required>
+                            <option value="">Select</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Chhattisgarh">Chhattisgarh</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Manipur">Manipur</option>
+                            <option value="Meghalaya">Meghalaya</option>
+                            <option value="Mizoram">Mizoram</option>
+                            <option value="Nagaland">Nagaland</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Sikkim">Sikkim</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Tripura">Tripura</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="Uttarakhand">Uttarakhand</option>
+                            <option value="West Bengal">West Bengal</option>
+                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                            <option value="Chandigarh">Chandigarh</option>
+                            <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                            <option value="Ladakh">Ladakh</option>
+                            <option value="Lakshadweep">Lakshadweep</option>
+                            <option value="Puducherry">Puducherry</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="zip">ZIP/Postal Code*</label>
+                        <input type="text" id="zip" placeholder="10001" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="country">Country*</label>
+                    <select id="country" required>
+                        <option value="">Select</option>
+                        <option value="US">United States</option>
+                        <option value="India">India</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Germany">Germany</option>
+                        <option value="France">France</option>
+                        <option value="Italy">Italy</option>
+                        <option value="Spain">Spain</option>
+                        <option value="Brazil">Brazil</option>
+                        <option value="Mexico">Mexico</option>
+                        <option value="China">China</option>
+                        <option value="Japan">Japan</option>
+                        <option value="South Korea">South Korea</option>
+                        <option value="Russia">Russia</option>
+                        <option value="South Africa">South Africa</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Saudi Arabia">Saudi Arabia</option>
+                        <option value="United Arab Emirates">United Arab Emirates</option>
+                        <option value="Singapore">Singapore</option>
+                    </select>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number*</label>
+                    <input type="tel" id="phone" placeholder="(555) 123-4567" required>
+                </div>
+                
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="saveShipping">
+                    <label for="saveShipping">Save this information for next time</label>
+                </div>
+            </fieldset>
+            
+            <fieldset class="form-section">
+                <legend>Shipping Method</legend>
+                <div class="shipping-options">
+                    <div class="shipping-option">
+                        <input type="radio" id="standardShipping" name="shipping" checked>
+                        <label for="standardShipping">
+                            <span class="option-name">Standard Shipping</span>
+                            <span class="option-details">3-5 business days</span>
+                            <span class="option-price">$5.99</span>
+                        </label>
+                    </div>
+                    <div class="shipping-option">
+                        <input type="radio" id="expressShipping" name="shipping">
+                        <label for="expressShipping">
+                            <span class="option-name">Express Shipping</span>
+                            <span class="option-details">1-2 business days</span>
+                            <span class="option-price">$12.99</span>
+                        </label>
+                    </div>
+                    <div class="shipping-option">
+                        <input type="radio" id="freeShipping" name="shipping">
+                        <label for="freeShipping">
+                            <span class="option-name">Free Shipping</span>
+                            <span class="option-details">5-7 business days</span>
+                            <span class="option-price">$0.00</span>
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+            
+            <fieldset class="form-section">
+                <legend>Payment Information</legend>
+                
+                <div class="payment-methods">
+                    <div class="payment-tabs">
+                        <button type="button" class="payment-tab" data-method="credit">Credit Card</button>
+                        <button type="button" class="payment-tab" data-method="paypal">PayPal</button>
+                        <button type="button" class="payment-tab" data-method="applepay">Apple Pay</button>
+                    </div>
+                    
+                    <div class="payment-content" id="creditForm">
+                        <div class="form-group">
+                            <label for="cardName">Name on Card*</label>
+                            <input type="text" id="cardName" placeholder="John Smith" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number*</label>
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+                            <div class="card-icons">
+                                <img src="Images/Misc/visa.png" alt="Visa">
+                                <img src="Images/Misc/mastercard.png" alt="Mastercard">
+                                <img src="Images/Misc/amex.png" alt="American Express">
+                                <img src="Images/Misc/discover.png" alt="Discover">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiryDate">Expiry Date*</label>
+                                <input type="text" id="expiryDate" placeholder="MM/YY" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">Security Code*</label>
+                                <input type="text" id="cvv" placeholder="123" required>
+                                <button type="button" class="cvv-help" aria-label="What's this?">?</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="saveCard">
+                            <label for="saveCard">Save this card for future purchases</label>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-content hidden" id="paypalForm">
+                        <p>You'll be redirected to PayPal to complete your purchase securely.</p>
+                        <button type="button" class="paypal-btn">
+                            <img src="paypal.png" alt="PayPal">
+                        </button>
+                    </div>
+                    
+                    <div class="payment-content hidden" id="applePayForm">
+                        <p>Complete your purchase with Apple Pay for a fast, secure checkout.</p>
+                        <button type="button" class="apple-pay-btn">
+                            <img src="apple-pay-logo.png" alt="Apple Pay">
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+            
+            <fieldset class="form-section">
+                <legend>Billing Address</legend>
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="sameAsShipping" checked>
+                    <label for="sameAsShipping">Same as shipping address</label>
+                </div>
+                
+                <div id="billingAddressFields" class="hidden">
+                </div>
+            </fieldset>
+            
+            <div class="form-group">
+                <label for="orderNotes">Order Notes (optional)</label>
+                <textarea id="orderNotes" placeholder="Special instructions, delivery preferences, etc." rows="3"></textarea>
+            </div>
+            
+            <div class="form-group checkbox terms">
+                <input type="checkbox" id="acceptTerms" required>
+                <label for="acceptTerms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>*</label>
+            </div>
+            
+            <button type="submit" class="submit-btn">
+                <ion-icon name="lock-closed"></ion-icon>
+                Place Order ($<span id="finalTotal">0.00</span>)
+            </button>
+            
+            <div class="security-assurance">
+                <ion-icon name="shield-checkmark"></ion-icon>
+                <span>Secure checkout. Your information is encrypted.</span>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="confirmationPopup" class="popup-overlay">
+    <div class="popup-container">
+        <div class="confirmation-content">
+            <ion-icon name="checkmark-circle" class="success-icon"></ion-icon>
+            <h2>Order Confirmed!</h2>
+            <p>Thank you for your purchase.</p>
+            <p>Order ID: <span id="orderId">RA-${Math.floor(Math.random() * 1000000)}</span></p>
+            <p>A confirmation email has been sent to:</p>
+            <p class="confirmation-email"><span id="confirmationEmail">user@example.com</span></p>
+            <button class="confirmation-btn">
+                <ion-icon name="home"></ion-icon>
+                Back to Gallery
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="resetPasswordModal" class="modal-overlay">
+    <div class="modal-container">
+        <button class="close-modal">&times;</button>
+        <h2>Reset Password</h2>
+        <form id="resetPasswordForm" novalidate>
+            <div class="form-group">
+                <label for="currentPassword">Current Password</label>
+                <input type="password" id="currentPassword" required aria-describedby="currentPasswordError">
+                <div id="currentPasswordError" class="error-message"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="newPassword">New Password</label>
+                <input type="password" id="newPassword" 
+                       required 
+                       minlength="8"
+                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                       aria-describedby="newPasswordError">
+                <div id="newPasswordError" class="error-message"></div>
+                <small>Must include uppercase, lowercase, number, and special character</small>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm New Password</label>
+                <input type="password" id="confirmPassword" required aria-describedby="confirmPasswordError">
+                <div id="confirmPasswordError" class="error-message"></div>
+            </div>
+
+            <button type="submit" class="submit-btn">Update Password</button>
+        </form>
+    </div>
+</div>
+
+<section class="hero enhanced-text">
+  <div class="hero-content">
+      <h2>Embrace Creativity This Spring</h2>
+      <p class="hero-subtext">Limited Time Sale with Code <span class="promo-code">SPRING10</span></p>
+      <p class="hero-subtext">Shop <span class="discount">10% Off</span> Art</p>
+      <a href="#explore-categories" class="cta-btn">Shop Now</a>
+  </div>
+</section>
+
+
+    <section id="explore-categories" class="categories">
+        <h2>Explore Categories</h2>
+        <div class="category-container">
+            <div class="category-item active-category" onclick="ArtGalleryApp.showCategory('paintings')">Paintings</div>
+            <div class="category-item" onclick="ArtGalleryApp.showCategory('abstract-art')">Abstract Art</div>
+            <div class="category-item" onclick="ArtGalleryApp.showCategory('oil-paintings')">Oil Paintings</div>
+            <div class="category-item" onclick="ArtGalleryApp.showCategory('landscapes')">Landscapes</div>
+            <div class="category-item" onclick="ArtGalleryApp.showCategory('large-works')">Large Works</div>
+            <div class="category-item" onclick="ArtGalleryApp.showCategory('new-this-week')">New This Week</div>
+            <div class="category-item" onclick="ArtGalleryApp.showCategory('curated-collections')">Curated Collections</div>
+            <div class="category-item" onclick="ArtGalleryApp.showCategory('featured')">Featured</div>
+            <div class="category-item" onclick="ArtGalleryApp.showCategory('sculpture')">Sculpture</div>            
+        </div>
+    </section>
+
+    <section id="paintings" class="category-details">
+        <h3>Paintings</h3>
+        <div class="artworks">
+            <div class="artwork enhanced-card">
+                <img src="Images/Paintings/Sunset over the Hills.jpg" alt="Sunset Over the Hills">
+                <div class="artwork-info">
+                    <p><strong>Title:</strong> Sunset Over the Hills</p>
+                    <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> John Doe</p>
+                    <p><strong>Price:</strong> $500</p>
+                    <div class="artwork-actions">
+                        <button class="like-btn" onclick="toggleLike(this)"><ion-icon name="heart-outline"></ion-icon></button>
+                        <button class="cart-btn" onclick="addToCart('Sunset Over the Hills', 500)"><ion-icon name="cart-outline"></ion-icon></button>
+                    </div>
+                </div>
+            </div>
+            <div class="artwork enhanced-card">
+                <img src="Images/Paintings/city-lights.jpeg" alt="City Lights">
+                <div class="artwork-info">
+                    <p><strong>Title:</strong> City Lights</p>
+                    <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Jane Smith</p>
+                    <p><strong>Price:</strong> $750</p>
+                    <div class="artwork-actions">
+                        <button class="like-btn" onclick="toggleLike(this)"><ion-icon name="heart-outline"></ion-icon></button>
+                        <button class="cart-btn" onclick="addToCart('City Lights', 750)"><ion-icon name="cart-outline"></ion-icon></button>
+                    </div>
+                </div>
+            </div>
+            <div class="artwork enhanced-card">
+                <img src="Images/Paintings/ocean-waves.jpg" alt="Ocean Waves">
+                <div class="artwork-info">
+                    <p><strong>Title:</strong> Ocean Waves</p>
+                    <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Emily Clark</p>
+                    <p><strong>Price:</strong> $600</p>
+                    <div class="artwork-actions">
+                        <button class="like-btn" onclick="toggleLike(this)"><ion-icon name="heart-outline"></ion-icon></button>
+                        <button class="cart-btn" onclick="addToCart('Ocean Waves', 600)"><ion-icon name="cart-outline"></ion-icon></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="abstract-art" class="category-details">
+        <h3>Abstract Art</h3>
+        <div class="artworks">
+            <div class="artwork enhanced-card">
+                <img src="Images/Abstracts/colour-burst.jpeg" alt="Color Burst">
+                <div class="artwork-info">
+                    <p><strong>Title:</strong> Color Burst</p>
+                    <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Sarah Adams</p>
+                    <p><strong>Price:</strong> $900</p>
+                    <div class="artwork-actions">
+                        <button class="like-btn" onclick="toggleLike(this)"><ion-icon name="heart-outline"></ion-icon></button>
+                        <button class="cart-btn" onclick="addToCart('Color Burst', 900)"><ion-icon name="cart-outline"></ion-icon></button>
+                    </div>
+                </div>
+            </div>
+            <div class="artwork enhanced-card">
+                <img src="Images/Abstracts/geometric-harmony.avif" alt="Geometric Harmony">
+                <div class="artwork-info">
+                    <p><strong>Title:</strong> Geometric Harmony</p>
+                    <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Michael Lee</p>
+                    <p><strong>Price:</strong> $1200</p>
+                    <div class="artwork-actions">
+                        <button class="like-btn" onclick="toggleLike(this)"><ion-icon name="heart-outline"></ion-icon></button>
+                        <button class="cart-btn" onclick="addToCart('Geometric Harmony', 1200)"><ion-icon name="cart-outline"></ion-icon></button>
+                    </div>
+                </div>
+            </div>
+            <div class="artwork enhanced-card">
+                <img src="Images/Abstracts/abstract-dreams.jpg" alt="Abstract Dreams">
+                <div class="artwork-info">
+                    <p><strong>Title:</strong> Abstract Dreams</p>
+                    <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Olivia Benson</p>
+                    <p><strong>Price:</strong> $850</p>
+                    <div class="artwork-actions">
+                        <button class="like-btn" onclick="toggleLike(this)"><ion-icon name="heart-outline"></ion-icon></button>
+                        <button class="cart-btn" onclick="addToCart('Abstract Dreams', 850)"><ion-icon name="cart-outline"></ion-icon></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="oil-paintings" class="category-details">
+      <h3>Oil Paintings</h3>
+      <div class="artworks">
+          <div class="artwork enhanced-card">
+              <img src="Images/Oil Paintings/old-mill.jpeg" alt="The Old Mill">
+              <div class="artwork-info">
+                  <p><strong>Title:</strong> The Old Mill</p>
+                  <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> David Miller</p>
+                  <p><strong>Price:</strong> $1500</p>
+                  <div class="artwork-actions">
+                      <button class="like-btn" onclick="toggleLike(this)"><ion-icon name="heart-outline"></ion-icon></button>
+                      <button class="cart-btn" onclick="addToCart('The Old Mill', 1500)"><ion-icon name="cart-outline"></ion-icon></button>
+                  </div>
+              </div>
+          </div>
+          <div class="artwork enhanced-card">
+              <img src="Images/Oil Paintings/mountain-vista.jpeg" alt="Mountain Vista">
+              <div class="artwork-info">
+                  <p><strong>Title:</strong> Mountain Vista</p>
+                  <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Anna Roberts</p>
+                  <p><strong>Price:</strong> $2000</p>
+                  <div class="artwork-actions">
+                      <button class="like-btn" onclick="toggleLike(this)"><ion-icon name="heart-outline"></ion-icon></button>
+                      <button class="cart-btn" onclick="addToCart('Mountain Vista', 2000)"><ion-icon name="cart-outline"></ion-icon></button>
+                  </div>
+              </div>
+          </div>
+          <div class="artwork enhanced-card">
+              <img src="Images/Oil Paintings/autumn-glow.jpeg" alt="Autumn Glow">
+              <div class="artwork-info">
+                  <p><strong>Title:</strong> Autumn Glow</p>
+                  <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Mark Johnson</p>
+                  <p><strong>Price:</strong> $1800</p>
+                  <div class="artwork-actions">
+                      <button class="like-btn" onclick="toggleLike(this)"><ion-icon name="heart-outline"></ion-icon></button>
+                      <button class="cart-btn" onclick="addToCart('Autumn Glow', 1800)"><ion-icon name="cart-outline"></ion-icon></button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <section id="landscapes" class="category-details">
+      <h3>Landscapes</h3>
+      <div class="artworks">
+          <div class="artwork enhanced-card">
+              <img src="Images/Landscapes/rolling-hills.jpg" alt="Rolling Hills">
+              <div class="artwork-info">
+                  <p><strong>Title:</strong> Rolling Hills</p>
+                  <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Laura Green</p>
+                  <p><strong>Price:</strong> $950</p>
+                  <div class="artwork-actions">
+                      <button class="like-btn" onclick="toggleLike(this)"><ion-icon name="heart-outline"></ion-icon></button>
+                      <button class="cart-btn" onclick="addToCart('Rolling Hills', 950)"><ion-icon name="cart-outline"></ion-icon></button>
+                  </div>
+              </div>
+          </div>
+          <div class="artwork enhanced-card">
+              <img src="Images/Landscapes/desert-mirage.jpg" alt="Desert Mirage">
+              <div class="artwork-info">
+                  <p><strong>Title:</strong> Desert Mirage</p>
+                  <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Chris Evans</p>
+                  <p><strong>Price:</strong> $1100</p>
+                  <div class="artwork-actions">
+                      <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+                      <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+                  </div>
+              </div>
+          </div>
+<div class="artwork enhanced-card">
+    <img src="Images/Landscapes/forest-path.jpg" alt="Forest Path">
+    <div class="artwork-info">
+        <p><strong>Title:</strong> Forest Path</p>
+        <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Emma Watson</p>
+        <p><strong>Price:</strong> $1300</p>
+        <div class="artwork-actions">
+            <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+            <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+
+<section id="large-works" class="category-details">
+<h3>Large Works</h3>
+<div class="artworks">
+<div class="artwork enhanced-card">
+    <img src="Images/Large Works/grand-canyon.jpg" alt="Grand Canyon">
+    <div class="artwork-info">
+        <p><strong>Title:</strong> Grand Canyon</p>
+        <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Robert Downey</p>
+        <p><strong>Price:</strong> $3000</p>
+        <div class="artwork-actions">
+            <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+            <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+        </div>
+    </div>
+</div>
+<div class="artwork enhanced-card">
+    <img src="Images/Large Works/urban-skyline.jpg" alt="Urban Skyline">
+    <div class="artwork-info">
+        <p><strong>Title:</strong> Urban Skyline</p>
+        <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Scarlett Johansson</p>
+        <p><strong>Price:</strong> $3500</p>
+        <div class="artwork-actions">
+            <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+            <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+        </div>
+    </div>
+</div>
+<div class="artwork enhanced-card">
+    <img src="Images/Large Works/ocean-depths.jpg" alt="Ocean Depths">
+    <div class="artwork-info">
+        <p><strong>Title:</strong> Ocean Depths</p>
+        <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Chris Hemsworth</p>
+        <p><strong>Price:</strong> $3200</p>
+        <div class="artwork-actions">
+            <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+            <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+
+<section id="new-this-week" class="category-details">
+<h3>New This Week</h3>
+<div class="artworks">
+<div class="artwork enhanced-card">
+    <img src="Images/New This Week/morning-dew.jpeg" alt="Morning Dew">
+    <div class="artwork-info">
+        <p><strong>Title:</strong> Morning Dew</p>
+        <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Tom Hiddleston</p>
+        <p><strong>Price:</strong> $700</p>
+        <div class="artwork-actions">
+            <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+            <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+        </div>
+    </div>
+</div>
+<div class="artwork enhanced-card">
+    <img src="Images/New This Week/golden-hour.jpg" alt="Golden Hour">
+    <div class="artwork-info">
+        <p><strong>Title:</strong> Golden Hour</p>
+        <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Elizabeth Olsen</p>
+        <p><strong>Price:</strong> $800</p>
+        <div class="artwork-actions">
+            <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+            <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+        </div>
+    </div>
+</div>
+<div class="artwork enhanced-card">
+    <img src="Images/New This Week/twilight-glow.jpg" alt="Twilight Glow">
+    <div class="artwork-info">
+        <p><strong>Title:</strong> Twilight Glow</p>
+        <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Paul Rudd</p>
+        <p><strong>Price:</strong> $750</p>
+        <div class="artwork-actions">
+            <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+            <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+
+<section id="curated-collections" class="category-details">
+<h3>Curated Collections</h3>
+<div class="artworks">
+<div class="artwork enhanced-card">
+    <img src="Images/Curated Collections/masterpiece-collection.jpg" alt="Masterpiece Collection">
+    <div class="artwork-info">
+        <p><strong>Title:</strong> Masterpiece Collection</p>
+        <p><strong>Curator:</strong> <ion-icon name="person-circle-outline"></ion-icon> Olivia Benson</p>
+        <p><strong>Price Range:</strong> $500 - $5000</p>
+        <div class="artwork-actions">
+            <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+            <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+        </div>
+    </div>
+</div>
+<div class="artwork enhanced-card">
+    <img src="Images/Curated Collections/modern-art-collection.jpeg" alt="Modern Art Collection">
+    <div class="artwork-info">
+        <p><strong>Title:</strong> Modern Art Collection</p>
+        <p><strong>Curator:</strong> <ion-icon name="person-circle-outline"></ion-icon> Michael Lee</p>
+        <p><strong>Price Range:</strong> $1000 - $4000</p>
+        <div class="artwork-actions">
+            <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+            <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+        </div>
+    </div>
+</div>
+<div class="artwork enhanced-card">
+    <img src="Images/Curated Collections/nature's-beauty-collection.jpg" alt="Nature's Beauty Collection">
+    <div class="artwork-info">
+        <p><strong>Title:</strong> Nature's Beauty Collection</p>
+        <p><strong>Curator:</strong> <ion-icon name="person-circle-outline"></ion-icon> Emily Clark</p>
+        <p><strong>Price Range:</strong> $800 - $3000</p>
+        <div class="artwork-actions">
+            <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+            <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+
+<section id="featured" class="category-details">
+<h3>Featured</h3>
+<div class="artworks">
+<div class="artwork enhanced-card">
+    <img src="Images/Featured/Starry-night.jpg" alt="Starry Night">
+    <div class="artwork-info">
+        <p><strong>Title:</strong> Starry Night</p>
+        <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Vincent Van Gogh</p>
+        <p><strong>Price:</strong> $2500</p>
+        <div class="artwork-actions">
+            <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+            <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+        </div>
+    </div>
+</div>
+<div class="artwork enhanced-card">
+    <img src="Images/Featured/mona-lisa.jpeg" alt="Mona Lisa">
+    <div class="artwork-info">
+        <p><strong>Title:</strong> Mona Lisa</p>
+        <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Leonardo da Vinci</p>
+        <p><strong>Price:</strong> $5000</p>
+        <div class="artwork-actions">
+            <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+            <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+        </div>
+    </div>
+</div>
+<div class="artwork enhanced-card">
+    <img src="Images/Featured/the-scream.webp" alt="The Scream">
+    <div class="artwork-info">
+        <p><strong>Title:</strong> The Scream</p>
+        <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Edvard Munch</p>
+        <p><strong>Price:</strong> $3000</p>
+        <div class="artwork-actions">
+            <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+            <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+
+<section id="sculpture" class="category-details">
+<h3>Sculpture</h3>
+<div class="artworks">
+<div class="artwork enhanced-card">
+    <img src="Images/Sculptures/the-thinker.jpg" alt="The Thinker">
+    <div class="artwork-info">
+        <p><strong>Title:</strong> The Thinker</p>
+        <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Auguste Rodin</p>
+        <p><strong>Price:</strong> $2000</p>
+        <div class="artwork-actions">
+            <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+            <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+        </div>
+    </div>
+</div>
+<div class="artwork enhanced-card">
+    <img src="Images/Sculptures/david.avif" alt="David">
+    <div class="artwork-info">
+        <p><strong>Title:</strong> David</p>
+        <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Michelangelo</p>
+        <p><strong>Price:</strong> $3500</p>
+        <div class="artwork-actions">
+            <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+            <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+        </div>
+    </div>
+</div>
+<div class="artwork enhanced-card">
+    <img src="Images/Sculptures/venus-de-milo.jpeg" alt="Venus de Milo">
+    <div class="artwork-info">
+        <p><strong>Title:</strong> Venus de Milo</p>
+        <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon> Alexandros of Antioch</p>
+        <p><strong>Price:</strong> $2800</p>
+        <div class="artwork-actions">
+            <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+            <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+
+<section class="best-of-2025">
+<h2>Best of 2025</h2>
+<div class="artworks">
+<div class="artwork enhanced-card">
+  <img src="Images/Best of 2025/Toward Lexington Avenue.jpg" alt="Toward Lexington Avenue">
+  <div class="artwork-info">
+      <p><strong>Title:</strong> Toward Lexington Avenue</p>
+      <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon>Chih H Shin</p>
+      <p><strong>Price:</strong>$2800</p>
+      <div class="artwork-actions">
+          <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+          <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+      </div>
+  </div>
+</div>
+
+<div class="artwork enhanced-card">
+  <img src="Images/Best of 2025/Unity-Artist.jpeg" alt="Unity / Artist Proof 1/3">
+  <div class="artwork-info">
+      <p><strong>Title:</strong> Unity / Artist Proof 1/3</p>
+      <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon>Yashel Lemay</p>
+      <p><strong>Price:</strong>$6500</p>
+      <div class="artwork-actions">
+          <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+          <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+      </div>
+  </div>
+</div>
+
+<div class="artwork enhanced-card">
+  <img src="Images/Best of 2025/Subject-to-Life.jpg" alt="Subject To Life">
+  <div class="artwork-info">
+      <p><strong>Title:</strong> Subject To Life</p>
+      <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon>Jarca Gallery</p>
+      <p><strong>Price:</strong>$5000</p>
+      <div class="artwork-actions">
+          <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+          <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+      </div>
+  </div>
+</div>
+</div>
+</section>
+<section class="new-arrivals">
+<h2>New Arrivals</h2>
+<div class="artworks">
+<div class="artwork enhanced-card">
+<img src="Images/New Arrivals/New 1.jpeg" alt="Reflections of the Past">
+<div class="artwork-info">
+    <p><strong>Title:</strong> Reflections of the Past</p>
+    <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon>Leonid Afremov</p>
+    <p><strong>Price:</strong>$200</p>
+    <div class="artwork-actions">
+        <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+        <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+    </div>
+</div>
+</div>
+
+<div class="artwork enhanced-card">
+<img src="Images/New Arrivals/New 2.jpeg" alt="Rocking Lady">
+<div class="artwork-info">
+    <p><strong>Title:</strong> Rocking Lady</p>
+    <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon>Fizdi Arts</p>
+    <p><strong>Price:</strong>$450</p>
+    <div class="artwork-actions">
+        <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+        <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+    </div>
+</div>
+</div>
+
+<div class="artwork enhanced-card">
+<img src="Images/New Arrivals/New 3.jpg" alt="Tulip Flowers">
+<div class="artwork-info">
+    <p><strong>Title:</strong> Tulip Flowers</p>
+    <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon>Mark Kazav</p>
+    <p><strong>Price:</strong>$300</p>
+    <div class="artwork-actions">
+        <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+        <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+    </div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="joy-of-art">
+<h2>The Joy of Art</h2>
+<div class="artworks">
+<!-- Item 1 -->
+<div class="artwork enhanced-card">
+<img src="Images/Joy of Art/Joy 1.jpg" alt="Spirits Of The Garments">
+<div class="artwork-info">
+    <p><strong>Title:</strong> Spirits Of The Garments</p>
+    <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon>Florencia Querberof</p>
+    <p><strong>Price:</strong>$150</p>
+    <div class="artwork-actions">
+        <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+        <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+    </div>
+</div>
+</div>
+
+<div class="artwork enhanced-card">
+<img src="Images/Joy of Art/Joy 2.jpeg" alt="Tales Of Limitless Space Iv">
+<div class="artwork-info">
+    <p><strong>Title:</strong> Tales Of Limitless Space Iv</p>
+    <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon>Danielle Caron</p>
+    <p><strong>Price:</strong>$125</p>
+    <div class="artwork-actions">
+        <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+        <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+    </div>
+</div>
+</div>
+
+
+<div class="artwork enhanced-card">
+<img src="Images/Joy of Art/Joy 3.jpeg" alt="Furniture Jockey 1 (2008...)">
+<div class="artwork-info">
+    <p><strong>Title:</strong> Furniture Jockey 1 (2008...)</p>
+    <p><strong>Artist:</strong> <ion-icon name="person-circle-outline"></ion-icon>Tim Macpherson</p>
+    <p><strong>Price:</strong>$120</p>
+    <div class="artwork-actions">
+        <button class="like-btn"><ion-icon name="heart-outline"></ion-icon></button>
+        <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon></button>
+    </div>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="footer-content">
+  <div class="footer-section">
+      <h3>TOP CATEGORIES</h3>
+      <ul>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('paintings-popup')">Paintings</a></li>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('abstract-popup')">Abstract Art</a></li>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('sculpture-popup')">Sculpture</a></li>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('oil-popup')">Oil Paintings</a></li>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('featured-popup')">Featured</a></li>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('new-popup')">New</a></li>
+      </ul>
+  </div>
+
+  <div class="footer-section">
+      <h3>FOR COLLECTORS</h3>
+      <ul>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('advisory-popup')">Art Advisory</a></li>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('buy-popup')">How to Buy Art</a></li>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('collections-popup')">Curated Collections</a></li>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('gift-popup')">Gift Card</a></li>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('consultant-popup')">Contact Art Consultant</a></li>
+      </ul>
+  </div>
+
+  <div class="footer-section">
+      <h3>FOR THE TRADE</h3>
+      <ul>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('trade-popup')">Trade Program</a></li>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('hospitality-popup')">Hospitality</a></li>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('healthcare-popup')">Healthcare</a></li>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('residential-popup')">Multi Family & Residential</a></li>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('commercial-popup')">Commercial</a></li>
+      </ul>
+  </div>
+
+  <div class="footer-section">
+      <h3>ABOUT</h3>
+      <ul>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('about-popup')">About Radiant Art</a></li>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('careers-popup')">Careers</a></li>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('stories-popup')">Radiant Art Stories</a></li>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('fair-popup')">The Other Art Fair</a></li>
+          <li><a href="#" onclick="ArtGalleryApp.openPopup('affiliate-popup')">Affiliate Program</a></li>
+      </ul>
+  </div>
+
+  <div class="footer-section newsletter">
+      <h3>SIGN UP FOR 10% OFF</h3>
+      <p>Discover new art and collections added weekly by our curators.</p>
+      <form class="newsletter-form">
+          <input type="email" placeholder="Enter Email Address" required>
+          <button type="submit">Sign Up</button>
+      </form>
+  </div>
+</div>
+
+<div class="legal">
+  <p>© 2025 Radiant Art. All Rights Reserved</p>
+</div>
+</footer>
+<div id="artworkPopup" class="popup-overlay">
+<div class="popup-container">
+  <button class="close-popup">&times;</button>
+  <div class="popup-content">
+      <div class="popup-image">
+          <img id="popupArtworkImage" src="" alt="Artwork">
+      </div>
+      <div class="popup-info">
+          <h2 id="popupArtworkTitle"></h2>
+          <p><strong>Artist:</strong> <span id="popupArtworkArtist"></span></p>
+          <p><strong>Price:</strong> <span id="popupArtworkPrice"></span></p>
+          <p><strong>Description:</strong> <span id="popupArtDescription"></span></p>
+          <p><strong>Size:</strong> <span id="popupArtSize"></span></p>
+          <p><strong>Medium:</strong> <span id="popupArtMedium"></span></p>
+          <p><strong>Category:</strong> <span id ="popupArtCategory"></span></p>
+          <div class="popup-buttons">
+              <button class="like-btn"><ion-icon name="heart-outline"></ion-icon> Like</button>
+              <button class="cart-btn"><ion-icon name="cart-outline"></ion-icon> Add to Cart</button>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+<div id="signupModal" class="modal-overlay">
+<div class="modal-container">
+  <button class="close-modal">&times;</button>
+  <div class="modal-content">
+      <h2>Create Your Art Collector Account</h2>
+      <form id="signupForm">
+          <div class="form-row">
+              <div class="form-group">
+                  <label for="firstName">First Name*</label>
+                  <input type="text" id="firstName" name="firstName" required>
+              </div>
+              <div class="form-group">
+                  <label for="lastName">Last Name*</label>
+                  <input type="text" id="lastName" name="lastName" required>
+              </div>
+          </div>
+          
+          <div class="form-group">
+              <label for="email">Email Address*</label>
+              <input type="email" id="email" name="email" required placeholder="example@email.com">
+          </div>
+          
+          <div class="form-group">
+              <label for="password">Create Password*</label>
+              <input type="password" id="password" name="password" required placeholder="At least 8 characters">
+              <div class="password-hint">Must include at least one number and special character</div>
+          </div>
+          
+          <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890">
+          </div>
+          
+          <div class="form-group">
+              <label for="address">Shipping Address</label>
+              <input type="text" id="street" name="street" placeholder="Street address">
+              <div class="form-row">
+                  <input type="text" id="city" name="city" placeholder="City" style="flex: 2;">
+                  <input type="text" id="state" name="state" placeholder="State" style="flex: 1;">
+                  <input type="text" id="zip" name="zip" placeholder="ZIP" style="flex: 1;">
+              </div>
+          </div>
+          
+          <div class="form-group">
+              <label for="artPreferences">Art Preferences</label>
+              <div class="preference-options">
+                  <label class="checkbox-option">
+                      <input type="checkbox" name="artType" value="paintings"> Paintings
+                  </label>
+                  <label class="checkbox-option">
+                      <input type="checkbox" name="artType" value="sculptures"> Sculptures
+                  </label>
+                  <label class="checkbox-option">
+                      <input type="checkbox" name="artType" value="photography"> Photography
+                  </label>
+                  <label class="checkbox-option">
+                      <input type="checkbox" name="artType" value="digital"> Digital Art
+                  </label>
+              </div>
+          </div>
+          
+          <div class="form-group">
+              <label for="budget">Average Budget</label>
+              <select id="budget" name="budget">
+                  <option value="">Select budget range</option>
+                  <option value="0-500">$0 - $500</option>
+                  <option value="500-2000">$500 - $2,000</option>
+                  <option value="2000-5000">$2,000 - $5,000</option>
+                  <option value="5000+">$5,000+</option>
+              </select>
+          </div>
+          
+          <div class="form-group">
+              <label for="newsletter">
+                  <input type="checkbox" id="newsletter" name="newsletter" checked>
+                  Receive art newsletters and exclusive offers
+              </label>
+          </div>
+          
+          <button type="submit" class="submit-btn">Create Account</button>
+          
+          <div class="login-link">
+              Already have an account? <a href="#" id="loginLink">Log in</a>
+          </div>
+      </form>
+  </div>
+</div>
+</div>
+
+<div id="profileModal" class="modal-overlay">
+<div class="modal-container">
+  <button class="close-modal">&times;</button>
+  <div class="modal-content">
+      <div class="profile-header">
+          <div class="profile-avatar">JS</div>
+          <h2>Santhosh A's Profile</h2>
+      </div>
+      
+      <div id="profileInfo" class="profile-details">
+          <div class="detail-group">
+              <h3>Account Information</h3>
+              <p><strong>Email:</strong> john.smith@example.com</p>
+              <p><strong>Member Since:</strong> June 2023</p>
+          </div>
+          
+          <div class="detail-group">
+              <h3>Contact Details</h3>
+              <p><strong>Phone:</strong> (123) 456-7890</p>
+              <p><strong>Primary Address:</strong> 123 Art Street, Brooklyn, NY 11201</p>
+          </div>
+          
+          <div class="detail-group">
+              <h3>Preferences</h3>
+              <p><strong>Favorite Art Types:</strong> Paintings, Photography</p>
+              <p><strong>Average Budget:</strong> $500 - $2,000</p>
+              <p><strong>Newsletter:</strong> Subscribed</p>
+          </div>
+          
+          <div class="detail-group">
+              <h3>Collection Stats</h3>
+              <p><strong>Liked Items:</strong> 12 artworks</p>
+              <p><strong>Purchases:</strong> 3 artworks</p>
+              <p><strong>Last Purchase:</strong> May 15, 2023</p>
+          </div>
+      </div>
+      
+      <div class="profile-actions">
+          <button id="editProfileBtn" class="edit-btn">
+              <ion-icon name="create-outline"></ion-icon> Edit Profile
+          </button>
+          <button id="changePasswordBtn" class="secondary-btn">
+              <ion-icon name="key-outline"></ion-icon> Change Password
+          </button>
+          <button id="logoutBtn" class="logout-btn">
+              <ion-icon name="log-out-outline"></ion-icon> Log Out
+          </button>
+      </div>
+  </div>
+</div>
+</div>
+<div id="likedItemsPopup" class="items-popup">
+<div class="popup-container">
+  <button id="likedClose" class="close-popup">&times;</button>
+  <h2>Your Favorite Artworks</h2>
+  <div class="items-list" id="likedItemsList">
+  </div>
+  <div class="popup-footer">
+      <p class="total">Total Value: <span id="likedItemsTotal">$0.00</span></p>
+  </div>
+</div>
+</div>
+
+<div id="cartItemsPopup" class="items-popup">
+<div class="popup-container">
+  <button id="cartClose" class="close-popup">&times;</button>
+  <h2>Your Shopping Cart</h2>
+  <div class="items-list" id="cartItemsList">
+  </div>
+  <div class="popup-footer">
+      <p class="total">Total: <span id="cartItemsTotal">$0.00</span></p>
+      <button class="checkout-btn">Proceed to Checkout</button>
+  </div>
+</div>
+</div>
+<div id="advisory-popup" class="popup-overlay">
+<div class="popup-container">
+  <button class="close-popup" onclick="ArtGalleryApp.closePopup('advisory-popup')">×</button>
+  <div class="popup-content">
+      <h2>Art Advisory Service</h2>
+      <p>Our expert art consultants at Radiant Art provide personalized recommendations based on your taste, space, and budget. Let us help you build a meaningful collection.</p>
+  </div>
+</div>
+</div>
+
+<div id="buy-popup" class="popup-overlay">
+<div class="popup-container">
+  <button class="close-popup" onclick="ArtGalleryApp.closePopup('buy-popup')">×</button>
+  <div class="popup-content">
+      <h2>How to Buy Art</h2>
+      <p>New to collecting? Radiant Art makes it easy. Learn about our purchasing process, payment options, and delivery services to start your art collection with confidence.</p>
+  </div>
+</div>
+</div>
+
+<div id="collections-popup" class="popup-overlay">
+<div class="popup-container">
+  <button class="close-popup" onclick="ArtGalleryApp.closePopup('collections-popup')">×</button>
+  <div class="popup-content">
+      <h2>Curated Collections</h2>
+      <p>Our curators at Radiant Art have thoughtfully assembled these collections around themes, styles, and movements to help you discover art that speaks to you.</p>
+  </div>
+</div>
+</div>
+
+<div id="gift-popup" class="popup-overlay">
+<div class="popup-container">
+  <button class="close-popup" onclick="ArtGalleryApp.closePopup('gift-popup')">×</button>
+  <div class="popup-content">
+      <h2>Gift Cards</h2>
+      <p>Give the gift of art with Radiant Art gift cards. Perfect for any occasion, our gift cards allow recipients to choose their perfect piece from our entire collection.</p>
+  </div>
+</div>
+</div>
+
+<div id="consultant-popup" class="popup-overlay">
+<div class="popup-container">
+    <button class="close-popup" onclick="ArtGalleryApp.closePopup('gift-popup')">×</button>
+        <div class="popup-content">
+            <h2>Art Consultants</h2>
+            <p>Our Radiant Art consultants are available to guide you through the collecting process. Schedule a consultation to discuss your artistic preferences and collection goals.</p>
+        </div>
+</div>
+</div>
+
+<!-- FOR THE TRADE Popups -->
+<div id="trade-popup" class="popup-overlay">
+<div class="popup-container">
+    <button class="close-popup" onclick="ArtGalleryApp.closePopup('trade-popup')">×</button>
+    <div class="popup-content">
+        <h2>Trade Program</h2>
+        <p>Radiant Art offers exclusive benefits for interior designers, architects, and trade professionals. Enjoy special pricing, dedicated support, and custom solutions.</p>
+    </div>
+</div>
+</div>
+
+<div id="hospitality-popup" class="popup-overlay">
+<div class="popup-container">
+    <button class="close-popup" onclick="ArtGalleryApp.closePopup('hospitality-popup')">×</button>
+    <div class="popup-content">
+        <h2>Hospitality Projects</h2>
+        <p>Radiant Art specializes in art solutions for hotels, restaurants, and hospitality venues. We handle everything from curation to installation for your property.</p>
+    </div>
+</div>
+</div>
+
+<div id="healthcare-popup" class="popup-overlay">
+<div class="popup-container">
+    <button class="close-popup" onclick="ArtGalleryApp.closePopup('healthcare-popup')">×</button>
+    <div class="popup-content">
+        <h2>Healthcare Art Solutions</h2>
+        <p>Our therapeutic art programs for healthcare facilities create healing environments. Radiant Art selects pieces that promote calm and positivity in medical settings.</p>
+    </div>
+</div>
+</div>
+
+<div id="residential-popup" class="popup-overlay">
+<div class="popup-container">
+    <button class="close-popup" onclick="ArtGalleryApp.closePopup('residential-popup')">×</button>
+    <div class="popup-content">
+        <h2>Residential Projects</h2>
+        <p>Radiant Art provides comprehensive art services for residential developments, from model units to common areas, enhancing property value and resident experience.</p>
+    </div>
+</div>
+</div>
+
+<div id="commercial-popup" class="popup-overlay">
+<div class="popup-container">
+    <button class="close-popup" onclick="ArtGalleryApp.closePopup('commercial-popup')">×</button>
+    <div class="popup-content">
+        <h2>Commercial Spaces</h2>
+        <p>Elevate your corporate environment with art from Radiant Art. We create inspiring workplace collections that reflect your company's values and brand identity.</p>
+    </div>
+</div>
+</div>
+
+<div id="about-popup" class="popup-overlay">
+<div class="popup-container">
+    <button class="close-popup" onclick="ArtGalleryApp.closePopup('about-popup')">×</button>
+    <div class="popup-content">
+        <h2>About Radiant Art</h2>
+        <p>Founded in 2010, Radiant Art has grown to become a leading platform for discovering exceptional art. We connect collectors with talented artists worldwide.</p>
+        <p>Our mission is to make art accessible while supporting artists at all stages of their careers.</p>
+    </div>
+</div>
+</div>
+
+<div id="careers-popup" class="popup-overlay">
+<div class="popup-container">
+    <button class="close-popup" onclick="ArtGalleryApp.closePopup('careers-popup')">×</button>
+    <div class="popup-content">
+        <h2>Careers at Radiant Art</h2>
+        <p>Join our passionate team at Radiant Art. We're always looking for talented individuals who share our love for art and commitment to excellent service.</p>
+    </div>
+</div>
+</div>
+
+<div id="stories-popup" class="popup-overlay">
+<div class="popup-container">
+    <button class="close-popup" onclick="ArtGalleryApp.closePopup('stories-popup')">×</button>
+    <div class="popup-content">
+        <h2>Radiant Art Stories</h2>
+        <p>Discover the stories behind the art and artists in our collection. Our blog features artist interviews, collection spotlights, and art world insights.</p>
+    </div>
+</div>
+</div>
+
+<div id="fair-popup" class="popup-overlay">
+<div class="popup-container">
+    <button class="close-popup" onclick="ArtGalleryApp.closePopup('fair-popup')">×</button>
+    <div class="popup-content">
+        <h2>The Other Art Fair</h2>
+        <p>Radiant Art proudly partners with The Other Art Fair, a global event showcasing emerging artistic talent. Meet artists in person and discover new favorites.</p>
+    </div>
+</div>
+</div>
+
+<div id="affiliate-popup" class="popup-overlay">
+<div class="popup-container">
+    <button class="close-popup" onclick="ArtGalleryApp.closePopup('affiliate-popup')">×</button>
+    <div class="popup-content">
+        <h2>Affiliate Program</h2>
+        <p>Join the Radiant Art affiliate program and earn commissions by referring clients to our platform. Perfect for bloggers, influencers, and art enthusiasts.</p>
+    </div>
+</div>
+</div>
+    <script src="Page.js"></script>
+</body>
+</html>
